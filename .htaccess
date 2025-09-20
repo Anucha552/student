@@ -1,0 +1,21 @@
+# ส่วนจัดการ Apache
+# ไฟล์นี้เป็นการตั้งค่า Apache เพื่อเปิดใช้งานระบบ URL Rewrite ซึ่งช่วยให้เราสามารถเขียน 
+# URL แบบสวยงาม Friendly URL โดยไม่ต้องแสดงไฟล์หรือพารามิเตอร์ที่ซับซ้อนใน URL จริง ๆ
+
+# เปิดใช้งาน mod_rewrite เพื่อ Rewrite URL
+RewriteEngine On
+
+# ตั้งฐานของโปรเจกต์ เปลี่ยนเป็นชื่อโปรเจกต์ ถ้าใช้ root ให้ใช้ /
+RewriteBase /
+
+# กำหนดหน้า 403 แบบ custom ถ้าใช้ root ให้ใช้ /errors/403.php
+ErrorDocument 403 /public/errors/403.php
+
+# บล็อกการเข้าถึงบางโฟลเดอร์ ถ้าต้องการบล็อกเพิ่มให้ระบุโฟลเดอร์ต่อหลัง app|NameFolder แล้วโชว์หน้า 403
+RewriteRule ^(app)/ - [F,L]
+
+# ถ้า URL ที่ร้องขอ ไม่ใช่ไฟล์จริง จะไม่โดน rewrite
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# ส่งคำขอทั้งหมด ที่ไม่ใช่ไฟล์จริง ไปที่ index.php พร้อมพารามิเตอร์ url
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]

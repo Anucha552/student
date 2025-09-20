@@ -1,0 +1,11 @@
+.bg-custom {
+    background-color: #dbedff !important;
+}
+
+.text-title {
+    font-weight: bold;
+}
+
+.border-box-img {
+    border: 2px dashed #007bff;
+}

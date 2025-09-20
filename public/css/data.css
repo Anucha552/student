@@ -1,0 +1,7 @@
+ pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: "Courier New", monospace;
+    color: #663300;
+    font-weight: bold;
+ }
